@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>BaiChat</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="/manifest.json"> <!-- PWA Support -->
 </head>
 <body>
 
@@ -54,20 +53,20 @@
             <!-- Sidebar (Chat List, Settings, etc.) -->
             <aside id="sidebar" class="sidebar">
                 <header class="sidebar-header">
-                    <div class="user-avatar" id="sidebar-avatar"></div>
+                    <div class="user-avatar" id="sidebar-avatar">👤</div>
                     <div class="header-actions">
-                        <button id="btn-search" title="Search"><svg>...</svg></button>
-                        <button id="btn-new-chat" title="New Chat"><svg>...</svg></button>
-                        <button id="btn-menu" title="Menu"><svg>...</svg></button>
+                        <button id="btn-search" title="Search">🔍</button>
+                        <button id="btn-new-chat" title="New Chat">💬</button>
+                        <button id="btn-menu" title="Menu">⋮</button>
                     </div>
                 </header>
 
                 <!-- Dropdown Menu -->
                 <div id="main-menu" class="dropdown-menu hidden">
-                    <a href="#" data-nav="profile">Profile</a>
-                    <a href="#" data-nav="settings">Settings</a>
-                    <a href="#" data-nav="qr-pair">QR Pairing</a>
-                    <a href="#" id="btn-logout">Logout</a>
+                    <a href="#" data-nav="profile">👤 Profile</a>
+                    <a href="#" data-nav="settings">⚙️ Settings</a>
+                    <a href="#" data-nav="qr-pair">📱 QR Pairing</a>
+                    <a href="#" id="btn-logout">🚪 Logout</a>
                 </div>
 
                 <!-- Search Bar (Hidden by default) -->
@@ -95,7 +94,7 @@
                     <header class="chat-header">
                         <button id="btn-back" class="back-btn mobile-only">←</button>
                         <div class="contact-info" id="chat-contact-info">
-                            <div class="user-avatar small"></div>
+                            <div class="user-avatar small">👤</div>
                             <div>
                                 <h3 id="chat-name">Username</h3>
                                 <span id="chat-status">online</span>
@@ -137,7 +136,7 @@
                         </div>
                         <div class="setting-group">
                             <h3>Account</h3>
-                            <button id="btn-change-password">Change Password</button>
+                            <button id="btn-change-password" class="btn-primary" style="margin-bottom:10px;">Change Password</button>
                             <button id="btn-delete-account" class="btn-danger">Delete Account</button>
                         </div>
                     </div>
@@ -150,8 +149,8 @@
                         <h2>Profile</h2>
                     </header>
                     <div class="profile-content">
-                        <div class="avatar-edit" id="profile-pic-large">IMG</div>
-                        <input type="text" id="edit-name" placeholder="Name">
+                        <div class="avatar-edit" id="profile-pic-large">🖼️</div>
+                        <input type="text" id="edit-name" placeholder="Name" style="margin-top:20px;">
                         <textarea id="edit-bio" placeholder="Bio"></textarea>
                         <button id="btn-save-profile" class="btn-primary">Save Changes</button>
                     </div>
@@ -163,8 +162,8 @@
                         <button class="back-btn" data-back="sidebar">←</button>
                         <h2>QR Pairing</h2>
                     </header>
-                    <div class="qr-content">
-                        <div id="qr-code-display" class="qr-code">[QR CODE]</div>
+                    <div class="qr-content" style="display:flex; flex-direction:column; align-items:center; padding:20px;">
+                        <div id="qr-code-display" class="qr-code" style="width:200px; height:200px; background:#ccc; display:flex; align-items:center; justify-content:center; margin-bottom:20px;">[QR CODE]</div>
                         <p>Scan this code with another device to log in.</p>
                     </div>
                 </div>
@@ -185,4 +184,4 @@
 
     <script type="module" src="app.js"></script>
 </body>
-                      </html>
+</html>
