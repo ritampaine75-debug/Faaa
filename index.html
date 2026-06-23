@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>BaiChat</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="/manifest.json"> <!-- PWA Support -->
+</head>
+<body>
+
+    <!-- Splash Screen -->
+    <div id="screen-splash" class="screen active">
+        <div class="splash-logo">BaiChat</div>
+    </div>
+
+    <!-- Auth Screens -->
+    <div id="screen-auth" class="screen">
+        <div class="auth-container">
+            <h1>Welcome to BaiChat</h1>
+            
+            <!-- Login Form -->
+            <form id="login-form" class="auth-form">
+                <input type="email" id="login-email" placeholder="Email" required>
+                <input type="password" id="login-password" placeholder="Password" required>
+                <button type="submit" class="btn-primary">Login</button>
+                <p>Don't have an account? <a href="#" id="show-register">Register</a></p>
+                <p><a href="#" id="show-forgot">Forgot Password?</a></p>
+            </form>
+
+            <!-- Register Form -->
+            <form id="register-form" class="auth-form hidden">
+                <input type="text" id="reg-name" placeholder="Full Name" required>
+                <input type="text" id="reg-username" placeholder="Username" required>
+                <input type="email" id="reg-email" placeholder="Email" required>
+                <input type="password" id="reg-password" placeholder="Password" required>
+                <button type="submit" class="btn-primary">Register</button>
+                <p>Already have an account? <a href="#" id="show-login">Login</a></p>
+            </form>
+
+            <!-- Forgot Password Form -->
+            <form id="forgot-form" class="auth-form hidden">
+                <input type="email" id="forgot-email" placeholder="Enter your email" required>
+                <button type="submit" class="btn-primary">Reset Password</button>
+                <p><a href="#" id="show-login-from-forgot">Back to Login</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main App Screen -->
+    <div id="screen-app" class="screen">
+        <div class="app-layout">
+            
+            <!-- Sidebar (Chat List, Settings, etc.) -->
+            <aside id="sidebar" class="sidebar">
+                <header class="sidebar-header">
+                    <div class="user-avatar" id="sidebar-avatar"></div>
+                    <div class="header-actions">
+                        <button id="btn-search" title="Search"><svg>...</svg></button>
+                        <button id="btn-new-chat" title="New Chat"><svg>...</svg></button>
+                        <button id="btn-menu" title="Menu"><svg>...</svg></button>
+                    </div>
+                </header>
+
+                <!-- Dropdown Menu -->
+                <div id="main-menu" class="dropdown-menu hidden">
+                    <a href="#" data-nav="profile">Profile</a>
+                    <a href="#" data-nav="settings">Settings</a>
+                    <a href="#" data-nav="qr-pair">QR Pairing</a>
+                    <a href="#" id="btn-logout">Logout</a>
+                </div>
+
+                <!-- Search Bar (Hidden by default) -->
+                <div id="search-bar" class="search-bar hidden">
+                    <input type="text" id="global-search" placeholder="Search users, messages, groups...">
+                </div>
+
+                <!-- Chat List -->
+                <div id="chat-list" class="chat-list">
+                    <!-- Populated by JS -->
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main id="main-content" class="main-content">
+                
+                <!-- Default Empty State -->
+                <div id="view-empty" class="view empty-state active">
+                    <h2>BaiChat Web</h2>
+                    <p>Send and receive messages seamlessly.</p>
+                </div>
+
+                <!-- Chat View -->
+                <div id="view-chat" class="view hidden">
+                    <header class="chat-header">
+                        <button id="btn-back" class="back-btn mobile-only">←</button>
+                        <div class="contact-info" id="chat-contact-info">
+                            <div class="user-avatar small"></div>
+                            <div>
+                                <h3 id="chat-name">Username</h3>
+                                <span id="chat-status">online</span>
+                            </div>
+                        </div>
+                        <div class="header-actions">
+                            <button id="btn-chat-search">🔍</button>
+                            <button id="btn-chat-menu">⋮</button>
+                        </div>
+                    </header>
+
+                    <div id="messages-container" class="messages-container">
+                        <!-- Messages populated by JS -->
+                    </div>
+
+                    <!-- Reply Preview -->
+                    <div id="reply-preview" class="reply-preview hidden">
+                        <span id="reply-text"></span>
+                        <button id="close-reply">✕</button>
+                    </div>
+
+                    <footer class="chat-input-area">
+                        <button id="btn-attach">📎</button>
+                        <input type="text" id="message-input" placeholder="Type a message">
+                        <button id="btn-send" class="btn-send">➤</button>
+                    </footer>
+                </div>
+
+                <!-- Settings View -->
+                <div id="view-settings" class="view hidden">
+                    <header class="view-header">
+                        <button class="back-btn" data-back="sidebar">←</button>
+                        <h2>Settings</h2>
+                    </header>
+                    <div class="settings-content">
+                        <div class="setting-group">
+                            <h3>Appearance</h3>
+                            <label>Dark Mode <input type="checkbox" id="toggle-dark-mode"></label>
+                        </div>
+                        <div class="setting-group">
+                            <h3>Account</h3>
+                            <button id="btn-change-password">Change Password</button>
+                            <button id="btn-delete-account" class="btn-danger">Delete Account</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile View -->
+                <div id="view-profile" class="view hidden">
+                    <header class="view-header">
+                        <button class="back-btn" data-back="sidebar">←</button>
+                        <h2>Profile</h2>
+                    </header>
+                    <div class="profile-content">
+                        <div class="avatar-edit" id="profile-pic-large">IMG</div>
+                        <input type="text" id="edit-name" placeholder="Name">
+                        <textarea id="edit-bio" placeholder="Bio"></textarea>
+                        <button id="btn-save-profile" class="btn-primary">Save Changes</button>
+                    </div>
+                </div>
+
+                <!-- QR Pairing View -->
+                <div id="view-qr" class="view hidden">
+                    <header class="view-header">
+                        <button class="back-btn" data-back="sidebar">←</button>
+                        <h2>QR Pairing</h2>
+                    </header>
+                    <div class="qr-content">
+                        <div id="qr-code-display" class="qr-code">[QR CODE]</div>
+                        <p>Scan this code with another device to log in.</p>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Context Menu for Messages -->
+    <div id="message-context-menu" class="context-menu hidden">
+        <a href="#" data-action="reply">Reply</a>
+        <a href="#" data-action="edit">Edit</a>
+        <a href="#" data-action="copy">Copy</a>
+        <a href="#" data-action="forward">Forward</a>
+        <a href="#" data-action="react">React</a>
+        <a href="#" data-action="delete" class="danger">Delete</a>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+                      </html>
